@@ -5,6 +5,7 @@ const matrixInput = matrixForm.querySelector("input");
 
 let matrix= [];
 let rowMatrix= [];
+/*
 let cell = {
     'row': 0,
     'col': 0,
@@ -29,6 +30,18 @@ function makeCol(col){
         rowMatrix.push(cell);
     }
     console.log(rowMatrix);
+}
+*/
+const makeRow = (row) => {
+    for(let i=0; i<row; i++){
+        matrix.push(rowMatrix);
+    }
+    console.log(matrix);
+}
+const makeCol = (col) => {
+    for (let i=0; i<col; i++){
+        rowMatrix.push(0);
+    }
 }
 
 function makeMatrix(row, col){
