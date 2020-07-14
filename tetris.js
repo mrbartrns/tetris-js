@@ -1,8 +1,8 @@
 // always start with minimum objects
 const tetris = document.querySelector(".tetris");
+const gameDiv = tetris.querySelector(".game");
 const matrixForm = tetris.querySelector(".matrix-form");
 const matrixInput = matrixForm.querySelector("input");
-
 let matrix= [];
 let rowMatrix= [];
 /*
@@ -32,6 +32,18 @@ function makeCol(col){
     console.log(rowMatrix);
 }
 */
+
+const makeContainer = (row, col) => {
+    for (let i=0; i<row; i++){
+        for (let j=0; j<col; j++){
+            const box = document.createElement("div");
+            box.className = "box";
+            gameDiv.appendChild(box);
+        }
+    }
+    
+}
+
 const makeRow = (row) => {
     for(let i=0; i<row; i++){
         matrix.push(rowMatrix);
@@ -47,6 +59,7 @@ const makeCol = (col) => {
 function makeMatrix(row, col){
     makeCol(col);
     makeRow(row);
+    makeContainer(row, col);
 }
 
 function handleSubmit(event){
