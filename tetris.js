@@ -3,6 +3,8 @@ const tetris = document.querySelector(".tetris");
 const gameDiv = tetris.querySelector(".game");
 const matrixForm = tetris.querySelector(".matrix-form");
 const startBtn = matrixForm.querySelector(".startbtn");
+const ROW = "row";
+const COL = "col";
 /*
 const matrixInput = matrixForm.querySelector("input");
 */
@@ -38,6 +40,18 @@ function makeCol(col){
     console.log(rowMatrix);
 }
 */
+/*
+after checker will be setted array after 3
+*/
+const paintBox = () => {
+    const boxContainer = docuemnt.querySelectorAll(".box");
+    const boxProperty = boxIndexCheck(matrix);
+    for (let i=0; i<boxProperty.length; i++){
+        
+    }
+
+}
+
 const boxIndexCheck = (matrix) => {
     let matrixColorArray = [];
     //search matrix
@@ -45,7 +59,7 @@ const boxIndexCheck = (matrix) => {
         for (let col=0; col<matrix[row].length; col++){
             //condition
             if (matrix[row][col] !== 0){
-                const matrixColorIndex = [row, col];
+                const matrixColorIndex = [row, col, matrix[row][col]];
                 matrixColorArray.push(matrixColorIndex);
             }
         }
@@ -53,14 +67,13 @@ const boxIndexCheck = (matrix) => {
     return matrixColorArray;
 }
 
+//make container with identifier row, col to class
 const makeContainer = (row, col) => {
     for (let i=0; i<row; i++){
         for (let j=0; j<col; j++){
             const box = document.createElement("div");
             const rowString = i.toString();
             const colString = j.toString();
-            const ROW = "row";
-            const COL = "col"
             const rowRowString = ROW + rowString;
             const colColString = COL + colString;
             box.className = "box";
@@ -98,8 +111,9 @@ function handleSubmit(event){
     const row = parseInt(currentValueList[0]);
     const col = parseInt(currentValueList[1]);
     */
-   const row = 20;
-   const col = 10;
+   //first 3 row is for setting block
+    const row = 23;
+    const col = 10;
     console.log(row, col);
     makeMatrix(row, col);
 }
