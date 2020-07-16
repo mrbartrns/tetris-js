@@ -43,28 +43,59 @@ function makeCol(col){
 /*
 after checker will be setted array after 3
 */
-const paintBox = () => {
-    const boxContainer = docuemnt.querySelectorAll(".box");
-    const boxProperty = boxIndexCheck(matrix);
-    for (let i=0; i<boxProperty.length; i++){
-        
+const clearBox = (row, col) => {
+    const makeClass = makeClassname(row, col);
+    const square = document.querySelector(`.${makeClass[0]}.${makeClass[1]}`);
+    if (square.classList.contains("type1")){
+        square.classList.remove("type1");
     }
-
+    else if (square.classList.contains("type2")){
+        square.classList.remove("type2");
+    }
+    else if (square.classList.contains("type3")){
+        square.classList.remove("type3");
+    }
+    else if (square.classList.contains("type4")) {
+        square.classList.remove("type4");
+    }
 }
 
+const paintBox = (matrix, row, col) => {
+    const makeClass = makeClassname(row, col);
+    const square = document.querySelector(`.${makeClass[0]}.${makeClass[1]}`);
+    if (matrix[row][col] === 1) {
+        square.classList.add("type1");
+    }
+    else if (matrix[row][col] === 2) {
+        square.classList.add("type2");
+    }
+    else if (matrix[row][col] === 3) {
+        square.classList.add("type3");
+    }
+    else if (matrix[row[col]] === 4) {
+        square.classList.add("type4");
+    }
+    }
+
 const boxIndexCheck = (matrix) => {
-    let matrixColorArray = [];
-    //search matrix
     for (let row=0; row<matrix.length; row++) {
-        for (let col=0; col<matrix[row].length; col++){
-            //condition
-            if (matrix[row][col] !== 0){
-                const matrixColorIndex = [row, col, matrix[row][col]];
-                matrixColorArray.push(matrixColorIndex);
+        for (let col=0; col<matrix[row].length; col++) {
+            if (matrix[row][col] !== 0) {
+                paintBox(matrix, row, col);
+            }
+            else {
+                clearBox(row, col);
             }
         }
     }
-    return matrixColorArray;
+}
+
+const makeClassname = (row, col)=> {
+    const rowString = row.toString();
+    const colString = col.toString();
+    const rowRowString = ROW + rowString;
+    const colColString = COL + colString;
+    return [rowRowString, colColString];
 }
 
 //make container with identifier row, col to class
@@ -72,13 +103,10 @@ const makeContainer = (row, col) => {
     for (let i=0; i<row; i++){
         for (let j=0; j<col; j++){
             const box = document.createElement("div");
-            const rowString = i.toString();
-            const colString = j.toString();
-            const rowRowString = ROW + rowString;
-            const colColString = COL + colString;
+            const makeClass = makeClassname(i, j);
             box.className = "box";
-            box.classList.add(rowRowString);
-            box.classList.add(colColString);
+            box.classList.add(makeClass[0]);
+            box.classList.add(makeClass[1]);
             gameDiv.appendChild(box);
         }
     }
